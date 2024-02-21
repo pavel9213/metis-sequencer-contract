@@ -1,0 +1,997 @@
+{
+  "address": "0x8567f56A26E9A875a65E4E526Ccd2E715F31D97f",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_lockingPool",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_newBatchId",
+          "type": "uint256"
+        }
+      ],
+      "name": "BatchSubmitReward",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "totalAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "ClaimRewards",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "newAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "LockUpdate",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "signer",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "activationBatch",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "signerPubkey",
+          "type": "bytes"
+        }
+      ],
+      "name": "Locked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        }
+      ],
+      "name": "Relocked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newReward",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldReward",
+          "type": "uint256"
+        }
+      ],
+      "name": "RewardUpdate",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "oldSigner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newSigner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "signerPubkey",
+          "type": "bytes"
+        }
+      ],
+      "name": "SignerChange",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newThreshold",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldThreshold",
+          "type": "uint256"
+        }
+      ],
+      "name": "ThresholdChange",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "deactivationBatch",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "deactivationTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "unlockClaimTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "UnlockInit",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        }
+      ],
+      "name": "Unlocked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_oldEpochLength",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_newEpochLength",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_effectiveBatch",
+          "type": "uint256"
+        }
+      ],
+      "name": "UpdateEpochLength",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newWithrawDelayTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldWithrawDelayTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "WithrawDelayTimeChange",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "lockingPool",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newBatchId",
+          "type": "uint256"
+        }
+      ],
+      "name": "logBatchSubmitReward",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "logClaimRewards",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalLock",
+          "type": "uint256"
+        }
+      ],
+      "name": "logLockUpdate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signer",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signerPubkey",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "activationBatch",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        }
+      ],
+      "name": "logLocked",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        }
+      ],
+      "name": "logRelockd",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newReward",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "oldReward",
+          "type": "uint256"
+        }
+      ],
+      "name": "logRewardUpdate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "oldSigner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "newSigner",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signerPubkey",
+          "type": "bytes"
+        }
+      ],
+      "name": "logSignerChange",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newThreshold",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "oldThreshold",
+          "type": "uint256"
+        }
+      ],
+      "name": "logThresholdChange",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deactivationBatch",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deactivationTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "unlockClaimTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "logUnlockInit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "sequencerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        }
+      ],
+      "name": "logUnlocked",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "oldEpochLength",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newEpochLength",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "effectiveBatch",
+          "type": "uint256"
+        }
+      ],
+      "name": "logUpdateEpochLength",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newWithrawDelayTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "oldWithrawDelayTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "logWithrawDelayTimeChange",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "sequencerNonce",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "sequencerIds",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "nonces",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "updateNonce",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x5bd1de304839de4cda98bcbb504235e71138aa34a99a529952cfcdf696df8382",
+  "receipt": {
+    "to": null,
+    "from": "0x0000001aB69b564959DAeF0F6dcd206dB0ACDc78",
+    "contractAddress": "0x8567f56A26E9A875a65E4E526Ccd2E715F31D97f",
+    "transactionIndex": 11,
+    "gasUsed": "1087340",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000001000000000000000000000004000000000000028000000000000000000800000000000000000000000000000000400000000000000000000000000000000000800000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000028000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x6a82008bb1dd87fcd33d22d3454dcd8d71ef01d0c4b5259f5868d8bbdc5f7701",
+    "transactionHash": "0x5bd1de304839de4cda98bcbb504235e71138aa34a99a529952cfcdf696df8382",
+    "logs": [
+      {
+        "transactionIndex": 11,
+        "blockNumber": 990732,
+        "transactionHash": "0x5bd1de304839de4cda98bcbb504235e71138aa34a99a529952cfcdf696df8382",
+        "address": "0x8567f56A26E9A875a65E4E526Ccd2E715F31D97f",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000001ab69b564959daef0f6dcd206db0acdc78"
+        ],
+        "data": "0x",
+        "logIndex": 4,
+        "blockHash": "0x6a82008bb1dd87fcd33d22d3454dcd8d71ef01d0c4b5259f5868d8bbdc5f7701"
+      }
+    ],
+    "blockNumber": 990732,
+    "cumulativeGasUsed": "1554602",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x98233085892A26520Bc1a1B99bbd207FEe748889"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "bd61565535e6da36da44608b004b3d95",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_lockingPool\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_newBatchId\",\"type\":\"uint256\"}],\"name\":\"BatchSubmitReward\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"totalAmount\",\"type\":\"uint256\"}],\"name\":\"ClaimRewards\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"newAmount\",\"type\":\"uint256\"}],\"name\":\"LockUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"activationBatch\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"signerPubkey\",\"type\":\"bytes\"}],\"name\":\"Locked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"}],\"name\":\"Relocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newReward\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldReward\",\"type\":\"uint256\"}],\"name\":\"RewardUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldSigner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newSigner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"signerPubkey\",\"type\":\"bytes\"}],\"name\":\"SignerChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newThreshold\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldThreshold\",\"type\":\"uint256\"}],\"name\":\"ThresholdChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"deactivationBatch\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"deactivationTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"unlockClaimTime\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"UnlockInit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"}],\"name\":\"Unlocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_oldEpochLength\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_newEpochLength\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_effectiveBatch\",\"type\":\"uint256\"}],\"name\":\"UpdateEpochLength\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newWithrawDelayTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldWithrawDelayTime\",\"type\":\"uint256\"}],\"name\":\"WithrawDelayTimeChange\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"lockingPool\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBatchId\",\"type\":\"uint256\"}],\"name\":\"logBatchSubmitReward\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalAmount\",\"type\":\"uint256\"}],\"name\":\"logClaimRewards\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalLock\",\"type\":\"uint256\"}],\"name\":\"logLockUpdate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"signerPubkey\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"activationBatch\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"}],\"name\":\"logLocked\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"}],\"name\":\"logRelockd\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newReward\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"oldReward\",\"type\":\"uint256\"}],\"name\":\"logRewardUpdate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"oldSigner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newSigner\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"signerPubkey\",\"type\":\"bytes\"}],\"name\":\"logSignerChange\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newThreshold\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"oldThreshold\",\"type\":\"uint256\"}],\"name\":\"logThresholdChange\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deactivationBatch\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deactivationTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"unlockClaimTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"logUnlockInit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"sequencerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"}],\"name\":\"logUnlocked\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"oldEpochLength\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"newEpochLength\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"effectiveBatch\",\"type\":\"uint256\"}],\"name\":\"logUpdateEpochLength\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newWithrawDelayTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"oldWithrawDelayTime\",\"type\":\"uint256\"}],\"name\":\"logWithrawDelayTimeChange\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"sequencerNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"sequencerIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"nonces\",\"type\":\"uint256[]\"}],\"name\":\"updateNonce\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"BatchSubmitReward(uint256)\":{\"details\":\"Emitted when batch update in  'batchSubmitRewards'\",\"params\":{\"_newBatchId\":\"new batchId.\"}},\"ClaimRewards(uint256,address,uint256,uint256)\":{\"details\":\"Emitted when sequencer withdraw rewards in 'withdrawRewards' or 'unlockClaim'\",\"params\":{\"amount\":\"the reward amount.\",\"recipient\":\"the address receive reward tokens\",\"sequencerId\":\"unique integer to identify a sequencer.\",\"totalAmount\":\"total rewards liquidated\"}},\"LockUpdate(uint256,uint256,uint256)\":{\"details\":\"Emitted when sequencer relocking in 'relock()'.\",\"params\":{\"newAmount\":\"the updated lock amount.\",\"nonce\":\"to synchronize the events in themis.\",\"sequencerId\":\"unique integer to identify a sequencer.\"}},\"Locked(address,uint256,uint256,uint256,uint256,uint256,bytes)\":{\"details\":\"Emitted when sequencer locks in '_lockFor()' in LockingPool.\",\"params\":{\"activationBatch\":\"sequencer's first epoch as proposer.\",\"amount\":\"locking amount.\",\"nonce\":\"to synchronize the events in themis.\",\"sequencerId\":\"unique integer to identify a sequencer.\",\"signer\":\"sequencer address.\",\"signerPubkey\":\"public key of the sequencer\",\"total\":\"total locking amount.\"}},\"Relocked(uint256,uint256,uint256)\":{\"details\":\"Emitted when the sequencer increase lock amoun in 'relock()'.\",\"params\":{\"amount\":\"locking new amount\",\"sequencerId\":\"unique integer to identify a sequencer.\",\"total\":\"the total locking amount\"}},\"RewardUpdate(uint256,uint256)\":{\"details\":\"Emitted when the proxy update threshold in 'updateBlockReward()'.\",\"params\":{\"newReward\":\"new block reward\",\"oldReward\":\"old block reward\"}},\"SignerChange(uint256,uint256,address,address,bytes)\":{\"details\":\"Emitted when the sequencer public key is updated in 'updateSigner()'.\",\"params\":{\"newSigner\":\"newSigner new address of the sequencer.\",\"nonce\":\"to synchronize the events in themis.\",\"oldSigner\":\"oldSigner old address of the sequencer.\",\"sequencerId\":\"unique integer to identify a sequencer.\",\"signerPubkey\":\"signerPubkey public key of the sequencer.\"}},\"ThresholdChange(uint256,uint256)\":{\"details\":\"Emitted when the proxy update threshold in 'updateSequencerThreshold()'.\",\"params\":{\"newThreshold\":\"new threshold\",\"oldThreshold\":\"old threshold\"}},\"UnlockInit(address,uint256,uint256,uint256,uint256,uint256,uint256)\":{\"details\":\"Emitted when sequencer unlocks in '_unlock()'.\",\"params\":{\"amount\":\"locking amount\",\"deactivationBatch\":\"last batch for sequencer.\",\"deactivationTime\":\"unlock block timestamp.\",\"nonce\":\"to synchronize the events in themis.\",\"sequencerId\":\"unique integer to identify a sequencer.\",\"unlockClaimTime\":\"when user can claim locked token.\",\"user\":\"address of the sequencer.\"}},\"Unlocked(address,uint256,uint256,uint256)\":{\"details\":\"Emitted when sequencer unlocks in 'unlockClaim()'\",\"params\":{\"amount\":\"locking amount.\",\"sequencerId\":\"unique integer to identify a sequencer.\",\"total\":\"total locking amount.\",\"user\":\"address of the sequencer.\"}},\"UpdateEpochLength(uint256,uint256,uint256)\":{\"details\":\"Emitted when batch update in  'updateEpochLength'\",\"params\":{\"_effectiveBatch\":\"effective batch id.\",\"_newEpochLength\":\"new epoch length.\",\"_oldEpochLength\":\"old epoch length.\"}},\"WithrawDelayTimeChange(uint256,uint256)\":{\"details\":\"Emitted when the proxy update threshold in 'updateWithdrawDelayTimeValue()'.\",\"params\":{\"newWithrawDelayTime\":\"new withdraw delay time\",\"oldWithrawDelayTime\":\"old withdraw delay time\"}}},\"kind\":\"dev\",\"methods\":{\"logBatchSubmitReward(uint256)\":{\"details\":\"logBatchSubmitReward log event BatchSubmitReward\"},\"logClaimRewards(uint256,address,uint256,uint256)\":{\"details\":\"logClaimRewards log event ClaimRewards\"},\"logLockUpdate(uint256,uint256)\":{\"details\":\"logLockUpdate log event LockUpdate\"},\"logLocked(address,bytes,uint256,uint256,uint256,uint256)\":{\"details\":\"logLocked log event Locked\"},\"logRelockd(uint256,uint256,uint256)\":{\"details\":\"logRelockd log event Relocked\"},\"logRewardUpdate(uint256,uint256)\":{\"details\":\"logRewardUpdate log event RewardUpdate\"},\"logSignerChange(uint256,address,address,bytes)\":{\"details\":\"logSignerChange log event SignerChange\"},\"logThresholdChange(uint256,uint256)\":{\"details\":\"logThresholdChange log event ThresholdChange\"},\"logUnlockInit(address,uint256,uint256,uint256,uint256,uint256)\":{\"details\":\"logUnlockInit log event logUnlockInit\"},\"logUnlocked(address,uint256,uint256,uint256)\":{\"details\":\"logUnlocked log event logUnlocked\"},\"logUpdateEpochLength(uint256,uint256,uint256)\":{\"details\":\"logUpdateEpochLength log event UpdateEpochLength\"},\"logWithrawDelayTimeChange(uint256,uint256)\":{\"details\":\"logWithrawDelayTimeChange log event WithrawDelayTimeChange\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"updateNonce(uint256[],uint256[])\":{\"details\":\"updateNonce can update nonce for sequencrs by owner\",\"params\":{\"nonces\":\"the sequencer nonces\",\"sequencerIds\":\"the sequencer ids.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/LockingInfo.sol\":\"LockingInfo\"},\"evmVersion\":\"berlin\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"none\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":800},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.9.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor() {\\n        _transferOwnership(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby disabling any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.9.4) (utils/Context.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0xa92e4fa126feb6907daa0513ddd816b2eb91f30a808de54f63c17d0e162c3439\",\"license\":\"MIT\"},\"contracts/LockingInfo.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity 0.8.20;\\n\\nimport {Ownable} from \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\n\\ncontract LockingInfo is Ownable {\\n    mapping(uint256 => uint256) public sequencerNonce;\\n    address public immutable lockingPool;\\n\\n    /**\\n     * @dev Emitted when sequencer locks in '_lockFor()' in LockingPool.\\n     * @param signer sequencer address.\\n     * @param sequencerId unique integer to identify a sequencer.\\n     * @param nonce to synchronize the events in themis.\\n     * @param activationBatch sequencer's first epoch as proposer.\\n     * @param amount locking amount.\\n     * @param total total locking amount.\\n     * @param signerPubkey public key of the sequencer\\n     */\\n    event Locked(\\n        address indexed signer,\\n        uint256 indexed sequencerId,\\n        uint256 nonce,\\n        uint256 indexed activationBatch,\\n        uint256 amount,\\n        uint256 total,\\n        bytes signerPubkey\\n    );\\n\\n    /**\\n     * @dev Emitted when sequencer unlocks in 'unlockClaim()'\\n     * @param user address of the sequencer.\\n     * @param sequencerId unique integer to identify a sequencer.\\n     * @param amount locking amount.\\n     * @param total total locking amount.\\n     */\\n    event Unlocked(\\n        address indexed user,\\n        uint256 indexed sequencerId,\\n        uint256 amount,\\n        uint256 total\\n    );\\n\\n    /**\\n     * @dev Emitted when sequencer unlocks in '_unlock()'.\\n     * @param user address of the sequencer.\\n     * @param sequencerId unique integer to identify a sequencer.\\n     * @param nonce to synchronize the events in themis.\\n     * @param deactivationBatch  last batch for sequencer.\\n     * @param deactivationTime unlock block timestamp.\\n     * @param unlockClaimTime when user can claim locked token.\\n     * @param amount locking amount\\n     */\\n    event UnlockInit(\\n        address indexed user,\\n        uint256 indexed sequencerId,\\n        uint256 nonce,\\n        uint256 deactivationBatch,\\n        uint256 deactivationTime,\\n        uint256 unlockClaimTime,\\n        uint256 indexed amount\\n    );\\n\\n    /**\\n     * @dev Emitted when the sequencer public key is updated in 'updateSigner()'.\\n     * @param sequencerId unique integer to identify a sequencer.\\n     * @param nonce to synchronize the events in themis.\\n     * @param oldSigner oldSigner old address of the sequencer.\\n     * @param newSigner newSigner new address of the sequencer.\\n     * @param signerPubkey signerPubkey public key of the sequencer.\\n     */\\n    event SignerChange(\\n        uint256 indexed sequencerId,\\n        uint256 nonce,\\n        address indexed oldSigner,\\n        address indexed newSigner,\\n        bytes signerPubkey\\n    );\\n\\n    /**\\n     * @dev Emitted when the sequencer increase lock amoun in 'relock()'.\\n     * @param sequencerId unique integer to identify a sequencer.\\n     * @param amount locking new amount\\n     * @param total the total locking amount\\n     */\\n    event Relocked(uint256 indexed sequencerId, uint256 amount, uint256 total);\\n\\n    /**\\n     * @dev Emitted when the proxy update threshold in 'updateSequencerThreshold()'.\\n     * @param newThreshold new threshold\\n     * @param oldThreshold  old threshold\\n     */\\n    event ThresholdChange(uint256 newThreshold, uint256 oldThreshold);\\n\\n    /**\\n     * @dev Emitted when the proxy update threshold in 'updateWithdrawDelayTimeValue()'.\\n     * @param newWithrawDelayTime new withdraw delay time\\n     * @param oldWithrawDelayTime  old withdraw delay time\\n     */\\n    event WithrawDelayTimeChange(\\n        uint256 newWithrawDelayTime,\\n        uint256 oldWithrawDelayTime\\n    );\\n\\n    /**\\n     * @dev Emitted when the proxy update threshold in 'updateBlockReward()'.\\n     * @param newReward new block reward\\n     * @param oldReward  old block reward\\n     */\\n    event RewardUpdate(uint256 newReward, uint256 oldReward);\\n\\n    /**\\n     * @dev Emitted when sequencer relocking in 'relock()'.\\n     * @param sequencerId unique integer to identify a sequencer.\\n     * @param nonce to synchronize the events in themis.\\n     * @param newAmount the updated lock amount.\\n     */\\n    event LockUpdate(\\n        uint256 indexed sequencerId,\\n        uint256 indexed nonce,\\n        uint256 indexed newAmount\\n    );\\n\\n    /**\\n     * @dev Emitted when sequencer withdraw rewards in 'withdrawRewards' or 'unlockClaim'\\n     * @param sequencerId unique integer to identify a sequencer.\\n     * @param recipient the address receive reward tokens\\n     * @param amount the reward amount.\\n     * @param totalAmount total rewards liquidated\\n     */\\n    event ClaimRewards(\\n        uint256 indexed sequencerId,\\n        address recipient,\\n        uint256 indexed amount,\\n        uint256 indexed totalAmount\\n    );\\n\\n    /**\\n     * @dev Emitted when batch update in  'batchSubmitRewards'\\n     * @param _newBatchId new batchId.\\n     */\\n    event BatchSubmitReward(uint256 _newBatchId);\\n\\n    /**\\n     * @dev Emitted when batch update in  'updateEpochLength'\\n     * @param _oldEpochLength old epoch length.\\n     * @param _newEpochLength new epoch length.\\n     * @param _effectiveBatch effective batch id.\\n     */\\n    event UpdateEpochLength(\\n        uint256 _oldEpochLength,\\n        uint256 _newEpochLength,\\n        uint256 _effectiveBatch\\n    );\\n\\n    modifier onlyLockingPool() {\\n        require(lockingPool == msg.sender, \\\"Invalid sender, not locking pool\\\");\\n        _;\\n    }\\n\\n    constructor(address _lockingPool) {\\n        lockingPool = _lockingPool;\\n    }\\n\\n    /**\\n     * @dev updateNonce can update nonce for sequencrs by owner\\n     * @param sequencerIds the sequencer ids.\\n     * @param nonces the sequencer nonces\\n     */\\n    function updateNonce(\\n        uint256[] calldata sequencerIds,\\n        uint256[] calldata nonces\\n    ) external onlyOwner {\\n        require(sequencerIds.length == nonces.length, \\\"args length mismatch\\\");\\n\\n        for (uint256 i = 0; i < sequencerIds.length; ++i) {\\n            sequencerNonce[sequencerIds[i]] = nonces[i];\\n        }\\n    }\\n\\n    /**\\n     * @dev logLocked log event Locked\\n     */\\n    function logLocked(\\n        address signer,\\n        bytes memory signerPubkey,\\n        uint256 sequencerId,\\n        uint256 activationBatch,\\n        uint256 amount,\\n        uint256 total\\n    ) external onlyLockingPool {\\n        sequencerNonce[sequencerId] = sequencerNonce[sequencerId] + 1;\\n        emit Locked(\\n            signer,\\n            sequencerId,\\n            sequencerNonce[sequencerId],\\n            activationBatch,\\n            amount,\\n            total,\\n            signerPubkey\\n        );\\n    }\\n\\n    /**\\n     * @dev logUnlocked log event logUnlocked\\n     */\\n    function logUnlocked(\\n        address user,\\n        uint256 sequencerId,\\n        uint256 amount,\\n        uint256 total\\n    ) external onlyLockingPool {\\n        emit Unlocked(user, sequencerId, amount, total);\\n    }\\n\\n    /**\\n     * @dev logUnlockInit log event logUnlockInit\\n     */\\n    function logUnlockInit(\\n        address user,\\n        uint256 sequencerId,\\n        uint256 deactivationBatch,\\n        uint256 deactivationTime,\\n        uint256 unlockClaimTime,\\n        uint256 amount\\n    ) external onlyLockingPool {\\n        sequencerNonce[sequencerId] = sequencerNonce[sequencerId] + 1;\\n        emit UnlockInit(\\n            user,\\n            sequencerId,\\n            sequencerNonce[sequencerId],\\n            deactivationBatch,\\n            deactivationTime,\\n            unlockClaimTime,\\n            amount\\n        );\\n    }\\n\\n    /**\\n     * @dev logSignerChange log event SignerChange\\n     */\\n    function logSignerChange(\\n        uint256 sequencerId,\\n        address oldSigner,\\n        address newSigner,\\n        bytes memory signerPubkey\\n    ) external onlyLockingPool {\\n        sequencerNonce[sequencerId] = sequencerNonce[sequencerId] + 1;\\n        emit SignerChange(\\n            sequencerId,\\n            sequencerNonce[sequencerId],\\n            oldSigner,\\n            newSigner,\\n            signerPubkey\\n        );\\n    }\\n\\n    /**\\n     * @dev logRelockd log event Relocked\\n     */\\n    function logRelockd(\\n        uint256 sequencerId,\\n        uint256 amount,\\n        uint256 total\\n    ) external onlyLockingPool {\\n        emit Relocked(sequencerId, amount, total);\\n    }\\n\\n    /**\\n     * @dev logThresholdChange log event ThresholdChange\\n     */\\n    function logThresholdChange(\\n        uint256 newThreshold,\\n        uint256 oldThreshold\\n    ) external onlyLockingPool {\\n        emit ThresholdChange(newThreshold, oldThreshold);\\n    }\\n\\n    /**\\n     * @dev logWithrawDelayTimeChange log event WithrawDelayTimeChange\\n     */\\n    function logWithrawDelayTimeChange(\\n        uint256 newWithrawDelayTime,\\n        uint256 oldWithrawDelayTime\\n    ) external onlyLockingPool {\\n        emit WithrawDelayTimeChange(newWithrawDelayTime, oldWithrawDelayTime);\\n    }\\n\\n    /**\\n     * @dev logRewardUpdate log event RewardUpdate\\n     */\\n    function logRewardUpdate(\\n        uint256 newReward,\\n        uint256 oldReward\\n    ) external onlyLockingPool {\\n        emit RewardUpdate(newReward, oldReward);\\n    }\\n\\n    /**\\n     * @dev logLockUpdate log event LockUpdate\\n     */\\n    function logLockUpdate(\\n        uint256 sequencerId,\\n        uint256 totalLock\\n    ) external onlyLockingPool {\\n        sequencerNonce[sequencerId] = sequencerNonce[sequencerId] + 1;\\n        emit LockUpdate(sequencerId, sequencerNonce[sequencerId], totalLock);\\n    }\\n\\n    /**\\n     * @dev logClaimRewards log event ClaimRewards\\n     */\\n    function logClaimRewards(\\n        uint256 sequencerId,\\n        address recipient,\\n        uint256 amount,\\n        uint256 totalAmount\\n    ) external onlyLockingPool {\\n        emit ClaimRewards(sequencerId, recipient, amount, totalAmount);\\n    }\\n\\n    /**\\n     * @dev logBatchSubmitReward log event BatchSubmitReward\\n     */\\n    function logBatchSubmitReward(uint256 newBatchId) external onlyLockingPool {\\n        emit BatchSubmitReward(newBatchId);\\n    }\\n\\n    /**\\n     * @dev logUpdateEpochLength log event UpdateEpochLength\\n     */\\n    function logUpdateEpochLength(\\n        uint256 oldEpochLength,\\n        uint256 newEpochLength,\\n        uint256 effectiveBatch\\n    ) external onlyLockingPool {\\n        emit UpdateEpochLength(oldEpochLength, newEpochLength, effectiveBatch);\\n    }\\n}\\n\",\"keccak256\":\"0xc5b00c5e95d5eca12ef55c2d7a3200d81d88bb197e3122b9df84f776ff98e7c6\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60a060405234801561001057600080fd5b5060405161137f38038061137f83398101604081905261002f91610099565b61003833610049565b6001600160a01b03166080526100c9565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b6000602082840312156100ab57600080fd5b81516001600160a01b03811681146100c257600080fd5b9392505050565b608051611247610138600039600081816101dc015281816102d40152818161037d0152818161047701528181610523015281816105bf0152818161068001528181610732015281816107ce015281816108b10152818161099601528181610a3c0152610ba301526112476000f3fe608060405234801561001057600080fd5b50600436106101365760003560e01c80639256da92116100b2578063c905f88c11610081578063eae3f74911610066578063eae3f74914610299578063f1980a50146102ac578063f2fde38b146102bf57600080fd5b8063c905f88c14610273578063e9abe5091461028657600080fd5b80639256da9214610227578063b6fa74c41461023a578063b80fbce51461024d578063c66fcac21461026057600080fd5b8063738ab0c0116101095780637c5c2830116100ee5780637c5c2830146101c457806385d1e2b8146101d75780638da5cb5b1461021657600080fd5b8063738ab0c01461019e5780637c446e59146101b157600080fd5b806317bf70eb1461013b57806343d2b49b1461016e57806356de391014610183578063715018a614610196575b600080fd5b61015b610149366004610d8f565b60016020526000908152604090205481565b6040519081526020015b60405180910390f35b61018161017c366004610da8565b6102d2565b005b610181610191366004610e89565b61037b565b610181610461565b6101816101ac366004610efa565b610475565b6101816101bf366004610d8f565b610521565b6101816101d2366004610da8565b6105bd565b6101fe7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610165565b6000546001600160a01b03166101fe565b610181610235366004610f26565b61067e565b610181610248366004610da8565b610730565b61018161025b366004610f5f565b6107cc565b61018161026e366004610fc7565b6108af565b610181610281366004610efa565b610994565b610181610294366004611011565b610a3a565b6101816102a7366004611098565b610adf565b6101816102ba366004610da8565b610ba1565b6101816102cd366004611104565b610c3d565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316331461033d5760405162461bcd60e51b8152602060048201819052602482015260008051602061121b83398151915260448201526064015b60405180910390fd5b60408051838152602081018390527f08cb0bf599c925a6240976039d9d4d3201d88d2ba83703b890049356cdbb67e691015b60405180910390a15050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146103e15760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b6000848152600160208190526040909120546103fc9161113c565b6000858152600160205260409081902082905551849186916001600160a01b038a16917fe6f1eb1f1d0ca344d03cf47b9e6ece8a7d3b196e38dd7dd2307cca75e26682a8916104519190889088908d9061119b565b60405180910390a4505050505050565b610469610ccd565b6104736000610d27565b565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146104db5760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60408051848152602081018490529081018290527f03db0faa8610e5b654faddb2ac7b852879768629fd82dceaf0b5d24fbee3ff559060600160405180910390a1505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146105875760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b6040518181527f9e5aedd489785d05ba086064386f2e75b3e497d3dc00a54ed1c78bfc50a3953f9060200160405180910390a150565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146106235760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60008281526001602081905260409091205461063e9161113c565b6000838152600160205260408082208390555183929185917fd716c027b3dd610e4534df756848128bbb159a757724c17d89fcc4d0151b1f309190a45050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146106e45760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b604080518381526020810183905284916001600160a01b038716917f5245d528087a96a64f4589a764f00061e4671eab90cb1e019b1a5b24b2e4c2a8910160405180910390a350505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146107965760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60408051838152602081018390527ff67f33e8589d3ea0356303c0f9a8e764873692159f777ff79e4fc523d389dfcd910161036f565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146108325760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60008481526001602081905260409091205461084d9161113c565b60008581526001602052604090819020829055516001600160a01b03808516929086169187917f086044c0612a8c965d4cccd907f0d588e40ad68438bd4c1274cac60f4c3a9d1f916108a1919087906111ca565b60405180910390a450505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146109155760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b6000858152600160208190526040909120546109309161113c565b60008681526001602090815260409182902083905581519283528201869052810184905260608101839052819086906001600160a01b038916907f06d9e13438f0daf13a71d63f3f8579db8bdeb299e4b651942313c73224d7af6990608001610451565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146109fa5760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b604080518381526020810183905284917f33a87ba488658b3d1319098cd49c6d65b72a79c0f3530fec611e7afffed04395910160405180910390a2505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03163314610aa05760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b6040516001600160a01b03841681528190839086907f18c7dc2a1800c409227dc12c0c05ada9c995ebfe0e42ae6d65f1b3ae3e6111de906020016108a1565b610ae7610ccd565b828114610b365760405162461bcd60e51b815260206004820152601460248201527f61726773206c656e677468206d69736d617463680000000000000000000000006044820152606401610334565b60005b83811015610b9a57828282818110610b5357610b536111eb565b9050602002013560016000878785818110610b7057610b706111eb565b9050602002013581526020019081526020016000208190555080610b9390611201565b9050610b39565b5050505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03163314610c075760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60408051838152602081018390527f5d16a900896e1160c2033bc940e6b072d3dc3b6a996fefb9b3b9b9678841824c910161036f565b610c45610ccd565b6001600160a01b038116610cc15760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201527f64647265737300000000000000000000000000000000000000000000000000006064820152608401610334565b610cca81610d27565b50565b6000546001600160a01b031633146104735760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610334565b600080546001600160a01b038381167fffffffffffffffffffffffff0000000000000000000000000000000000000000831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b600060208284031215610da157600080fd5b5035919050565b60008060408385031215610dbb57600080fd5b50508035926020909101359150565b80356001600160a01b0381168114610de157600080fd5b919050565b634e487b7160e01b600052604160045260246000fd5b600082601f830112610e0d57600080fd5b813567ffffffffffffffff80821115610e2857610e28610de6565b604051601f8301601f19908116603f01168101908282118183101715610e5057610e50610de6565b81604052838152866020858801011115610e6957600080fd5b836020870160208301376000602085830101528094505050505092915050565b60008060008060008060c08789031215610ea257600080fd5b610eab87610dca565b9550602087013567ffffffffffffffff811115610ec757600080fd5b610ed389828a01610dfc565b96999698505050506040850135946060810135946080820135945060a09091013592509050565b600080600060608486031215610f0f57600080fd5b505081359360208301359350604090920135919050565b60008060008060808587031215610f3c57600080fd5b610f4585610dca565b966020860135965060408601359560600135945092505050565b60008060008060808587031215610f7557600080fd5b84359350610f8560208601610dca565b9250610f9360408601610dca565b9150606085013567ffffffffffffffff811115610faf57600080fd5b610fbb87828801610dfc565b91505092959194509250565b60008060008060008060c08789031215610fe057600080fd5b610fe987610dca565b9860208801359850604088013597606081013597506080810135965060a00135945092505050565b6000806000806080858703121561102757600080fd5b8435935061103760208601610dca565b93969395505050506040820135916060013590565b60008083601f84011261105e57600080fd5b50813567ffffffffffffffff81111561107657600080fd5b6020830191508360208260051b850101111561109157600080fd5b9250929050565b600080600080604085870312156110ae57600080fd5b843567ffffffffffffffff808211156110c657600080fd5b6110d28883890161104c565b909650945060208701359150808211156110eb57600080fd5b506110f88782880161104c565b95989497509550505050565b60006020828403121561111657600080fd5b61111f82610dca565b9392505050565b634e487b7160e01b600052601160045260246000fd5b8082018082111561114f5761114f611126565b92915050565b6000815180845260005b8181101561117b5760208185018101518683018201520161115f565b506000602082860101526020601f19601f83011685010191505092915050565b8481528360208201528260408201526080606082015260006111c06080830184611155565b9695505050505050565b8281526040602082015260006111e36040830184611155565b949350505050565b634e487b7160e01b600052603260045260246000fd5b60006001820161121357611213611126565b506001019056fe496e76616c69642073656e6465722c206e6f74206c6f636b696e6720706f6f6ca164736f6c6343000814000a",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106101365760003560e01c80639256da92116100b2578063c905f88c11610081578063eae3f74911610066578063eae3f74914610299578063f1980a50146102ac578063f2fde38b146102bf57600080fd5b8063c905f88c14610273578063e9abe5091461028657600080fd5b80639256da9214610227578063b6fa74c41461023a578063b80fbce51461024d578063c66fcac21461026057600080fd5b8063738ab0c0116101095780637c5c2830116100ee5780637c5c2830146101c457806385d1e2b8146101d75780638da5cb5b1461021657600080fd5b8063738ab0c01461019e5780637c446e59146101b157600080fd5b806317bf70eb1461013b57806343d2b49b1461016e57806356de391014610183578063715018a614610196575b600080fd5b61015b610149366004610d8f565b60016020526000908152604090205481565b6040519081526020015b60405180910390f35b61018161017c366004610da8565b6102d2565b005b610181610191366004610e89565b61037b565b610181610461565b6101816101ac366004610efa565b610475565b6101816101bf366004610d8f565b610521565b6101816101d2366004610da8565b6105bd565b6101fe7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610165565b6000546001600160a01b03166101fe565b610181610235366004610f26565b61067e565b610181610248366004610da8565b610730565b61018161025b366004610f5f565b6107cc565b61018161026e366004610fc7565b6108af565b610181610281366004610efa565b610994565b610181610294366004611011565b610a3a565b6101816102a7366004611098565b610adf565b6101816102ba366004610da8565b610ba1565b6101816102cd366004611104565b610c3d565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316331461033d5760405162461bcd60e51b8152602060048201819052602482015260008051602061121b83398151915260448201526064015b60405180910390fd5b60408051838152602081018390527f08cb0bf599c925a6240976039d9d4d3201d88d2ba83703b890049356cdbb67e691015b60405180910390a15050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146103e15760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b6000848152600160208190526040909120546103fc9161113c565b6000858152600160205260409081902082905551849186916001600160a01b038a16917fe6f1eb1f1d0ca344d03cf47b9e6ece8a7d3b196e38dd7dd2307cca75e26682a8916104519190889088908d9061119b565b60405180910390a4505050505050565b610469610ccd565b6104736000610d27565b565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146104db5760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60408051848152602081018490529081018290527f03db0faa8610e5b654faddb2ac7b852879768629fd82dceaf0b5d24fbee3ff559060600160405180910390a1505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146105875760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b6040518181527f9e5aedd489785d05ba086064386f2e75b3e497d3dc00a54ed1c78bfc50a3953f9060200160405180910390a150565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146106235760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60008281526001602081905260409091205461063e9161113c565b6000838152600160205260408082208390555183929185917fd716c027b3dd610e4534df756848128bbb159a757724c17d89fcc4d0151b1f309190a45050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146106e45760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b604080518381526020810183905284916001600160a01b038716917f5245d528087a96a64f4589a764f00061e4671eab90cb1e019b1a5b24b2e4c2a8910160405180910390a350505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146107965760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60408051838152602081018390527ff67f33e8589d3ea0356303c0f9a8e764873692159f777ff79e4fc523d389dfcd910161036f565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146108325760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60008481526001602081905260409091205461084d9161113c565b60008581526001602052604090819020829055516001600160a01b03808516929086169187917f086044c0612a8c965d4cccd907f0d588e40ad68438bd4c1274cac60f4c3a9d1f916108a1919087906111ca565b60405180910390a450505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146109155760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b6000858152600160208190526040909120546109309161113c565b60008681526001602090815260409182902083905581519283528201869052810184905260608101839052819086906001600160a01b038916907f06d9e13438f0daf13a71d63f3f8579db8bdeb299e4b651942313c73224d7af6990608001610451565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031633146109fa5760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b604080518381526020810183905284917f33a87ba488658b3d1319098cd49c6d65b72a79c0f3530fec611e7afffed04395910160405180910390a2505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03163314610aa05760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b6040516001600160a01b03841681528190839086907f18c7dc2a1800c409227dc12c0c05ada9c995ebfe0e42ae6d65f1b3ae3e6111de906020016108a1565b610ae7610ccd565b828114610b365760405162461bcd60e51b815260206004820152601460248201527f61726773206c656e677468206d69736d617463680000000000000000000000006044820152606401610334565b60005b83811015610b9a57828282818110610b5357610b536111eb565b9050602002013560016000878785818110610b7057610b706111eb565b9050602002013581526020019081526020016000208190555080610b9390611201565b9050610b39565b5050505050565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03163314610c075760405162461bcd60e51b8152602060048201819052602482015260008051602061121b8339815191526044820152606401610334565b60408051838152602081018390527f5d16a900896e1160c2033bc940e6b072d3dc3b6a996fefb9b3b9b9678841824c910161036f565b610c45610ccd565b6001600160a01b038116610cc15760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201527f64647265737300000000000000000000000000000000000000000000000000006064820152608401610334565b610cca81610d27565b50565b6000546001600160a01b031633146104735760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610334565b600080546001600160a01b038381167fffffffffffffffffffffffff0000000000000000000000000000000000000000831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b600060208284031215610da157600080fd5b5035919050565b60008060408385031215610dbb57600080fd5b50508035926020909101359150565b80356001600160a01b0381168114610de157600080fd5b919050565b634e487b7160e01b600052604160045260246000fd5b600082601f830112610e0d57600080fd5b813567ffffffffffffffff80821115610e2857610e28610de6565b604051601f8301601f19908116603f01168101908282118183101715610e5057610e50610de6565b81604052838152866020858801011115610e6957600080fd5b836020870160208301376000602085830101528094505050505092915050565b60008060008060008060c08789031215610ea257600080fd5b610eab87610dca565b9550602087013567ffffffffffffffff811115610ec757600080fd5b610ed389828a01610dfc565b96999698505050506040850135946060810135946080820135945060a09091013592509050565b600080600060608486031215610f0f57600080fd5b505081359360208301359350604090920135919050565b60008060008060808587031215610f3c57600080fd5b610f4585610dca565b966020860135965060408601359560600135945092505050565b60008060008060808587031215610f7557600080fd5b84359350610f8560208601610dca565b9250610f9360408601610dca565b9150606085013567ffffffffffffffff811115610faf57600080fd5b610fbb87828801610dfc565b91505092959194509250565b60008060008060008060c08789031215610fe057600080fd5b610fe987610dca565b9860208801359850604088013597606081013597506080810135965060a00135945092505050565b6000806000806080858703121561102757600080fd5b8435935061103760208601610dca565b93969395505050506040820135916060013590565b60008083601f84011261105e57600080fd5b50813567ffffffffffffffff81111561107657600080fd5b6020830191508360208260051b850101111561109157600080fd5b9250929050565b600080600080604085870312156110ae57600080fd5b843567ffffffffffffffff808211156110c657600080fd5b6110d28883890161104c565b909650945060208701359150808211156110eb57600080fd5b506110f88782880161104c565b95989497509550505050565b60006020828403121561111657600080fd5b61111f82610dca565b9392505050565b634e487b7160e01b600052601160045260246000fd5b8082018082111561114f5761114f611126565b92915050565b6000815180845260005b8181101561117b5760208185018101518683018201520161115f565b506000602082860101526020601f19601f83011685010191505092915050565b8481528360208201528260408201526080606082015260006111c06080830184611155565b9695505050505050565b8281526040602082015260006111e36040830184611155565b949350505050565b634e487b7160e01b600052603260045260246000fd5b60006001820161121357611213611126565b506001019056fe496e76616c69642073656e6465722c206e6f74206c6f636b696e6720706f6f6ca164736f6c6343000814000a",
+  "devdoc": {
+    "events": {
+      "BatchSubmitReward(uint256)": {
+        "details": "Emitted when batch update in  'batchSubmitRewards'",
+        "params": {
+          "_newBatchId": "new batchId."
+        }
+      },
+      "ClaimRewards(uint256,address,uint256,uint256)": {
+        "details": "Emitted when sequencer withdraw rewards in 'withdrawRewards' or 'unlockClaim'",
+        "params": {
+          "amount": "the reward amount.",
+          "recipient": "the address receive reward tokens",
+          "sequencerId": "unique integer to identify a sequencer.",
+          "totalAmount": "total rewards liquidated"
+        }
+      },
+      "LockUpdate(uint256,uint256,uint256)": {
+        "details": "Emitted when sequencer relocking in 'relock()'.",
+        "params": {
+          "newAmount": "the updated lock amount.",
+          "nonce": "to synchronize the events in themis.",
+          "sequencerId": "unique integer to identify a sequencer."
+        }
+      },
+      "Locked(address,uint256,uint256,uint256,uint256,uint256,bytes)": {
+        "details": "Emitted when sequencer locks in '_lockFor()' in LockingPool.",
+        "params": {
+          "activationBatch": "sequencer's first epoch as proposer.",
+          "amount": "locking amount.",
+          "nonce": "to synchronize the events in themis.",
+          "sequencerId": "unique integer to identify a sequencer.",
+          "signer": "sequencer address.",
+          "signerPubkey": "public key of the sequencer",
+          "total": "total locking amount."
+        }
+      },
+      "Relocked(uint256,uint256,uint256)": {
+        "details": "Emitted when the sequencer increase lock amoun in 'relock()'.",
+        "params": {
+          "amount": "locking new amount",
+          "sequencerId": "unique integer to identify a sequencer.",
+          "total": "the total locking amount"
+        }
+      },
+      "RewardUpdate(uint256,uint256)": {
+        "details": "Emitted when the proxy update threshold in 'updateBlockReward()'.",
+        "params": {
+          "newReward": "new block reward",
+          "oldReward": "old block reward"
+        }
+      },
+      "SignerChange(uint256,uint256,address,address,bytes)": {
+        "details": "Emitted when the sequencer public key is updated in 'updateSigner()'.",
+        "params": {
+          "newSigner": "newSigner new address of the sequencer.",
+          "nonce": "to synchronize the events in themis.",
+          "oldSigner": "oldSigner old address of the sequencer.",
+          "sequencerId": "unique integer to identify a sequencer.",
+          "signerPubkey": "signerPubkey public key of the sequencer."
+        }
+      },
+      "ThresholdChange(uint256,uint256)": {
+        "details": "Emitted when the proxy update threshold in 'updateSequencerThreshold()'.",
+        "params": {
+          "newThreshold": "new threshold",
+          "oldThreshold": "old threshold"
+        }
+      },
+      "UnlockInit(address,uint256,uint256,uint256,uint256,uint256,uint256)": {
+        "details": "Emitted when sequencer unlocks in '_unlock()'.",
+        "params": {
+          "amount": "locking amount",
+          "deactivationBatch": "last batch for sequencer.",
+          "deactivationTime": "unlock block timestamp.",
+          "nonce": "to synchronize the events in themis.",
+          "sequencerId": "unique integer to identify a sequencer.",
+          "unlockClaimTime": "when user can claim locked token.",
+          "user": "address of the sequencer."
+        }
+      },
+      "Unlocked(address,uint256,uint256,uint256)": {
+        "details": "Emitted when sequencer unlocks in 'unlockClaim()'",
+        "params": {
+          "amount": "locking amount.",
+          "sequencerId": "unique integer to identify a sequencer.",
+          "total": "total locking amount.",
+          "user": "address of the sequencer."
+        }
+      },
+      "UpdateEpochLength(uint256,uint256,uint256)": {
+        "details": "Emitted when batch update in  'updateEpochLength'",
+        "params": {
+          "_effectiveBatch": "effective batch id.",
+          "_newEpochLength": "new epoch length.",
+          "_oldEpochLength": "old epoch length."
+        }
+      },
+      "WithrawDelayTimeChange(uint256,uint256)": {
+        "details": "Emitted when the proxy update threshold in 'updateWithdrawDelayTimeValue()'.",
+        "params": {
+          "newWithrawDelayTime": "new withdraw delay time",
+          "oldWithrawDelayTime": "old withdraw delay time"
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "logBatchSubmitReward(uint256)": {
+        "details": "logBatchSubmitReward log event BatchSubmitReward"
+      },
+      "logClaimRewards(uint256,address,uint256,uint256)": {
+        "details": "logClaimRewards log event ClaimRewards"
+      },
+      "logLockUpdate(uint256,uint256)": {
+        "details": "logLockUpdate log event LockUpdate"
+      },
+      "logLocked(address,bytes,uint256,uint256,uint256,uint256)": {
+        "details": "logLocked log event Locked"
+      },
+      "logRelockd(uint256,uint256,uint256)": {
+        "details": "logRelockd log event Relocked"
+      },
+      "logRewardUpdate(uint256,uint256)": {
+        "details": "logRewardUpdate log event RewardUpdate"
+      },
+      "logSignerChange(uint256,address,address,bytes)": {
+        "details": "logSignerChange log event SignerChange"
+      },
+      "logThresholdChange(uint256,uint256)": {
+        "details": "logThresholdChange log event ThresholdChange"
+      },
+      "logUnlockInit(address,uint256,uint256,uint256,uint256,uint256)": {
+        "details": "logUnlockInit log event logUnlockInit"
+      },
+      "logUnlocked(address,uint256,uint256,uint256)": {
+        "details": "logUnlocked log event logUnlocked"
+      },
+      "logUpdateEpochLength(uint256,uint256,uint256)": {
+        "details": "logUpdateEpochLength log event UpdateEpochLength"
+      },
+      "logWithrawDelayTimeChange(uint256,uint256)": {
+        "details": "logWithrawDelayTimeChange log event WithrawDelayTimeChange"
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      },
+      "updateNonce(uint256[],uint256[])": {
+        "details": "updateNonce can update nonce for sequencrs by owner",
+        "params": {
+          "nonces": "the sequencer nonces",
+          "sequencerIds": "the sequencer ids."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 818,
+        "contract": "contracts/LockingInfo.sol:LockingInfo",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 6274,
+        "contract": "contracts/LockingInfo.sol:LockingInfo",
+        "label": "sequencerNonce",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_uint256,t_uint256)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_uint256,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
