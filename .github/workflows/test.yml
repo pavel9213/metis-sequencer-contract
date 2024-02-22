@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  DEPLOYER_KEY: 0xdeadbeafdeadbeafdeadbeafdeadbeafdeadbeafdeadbeafdeadbeafdeadbeaf
+  DEPLOYER_KEY: "0xdeadbeafdeadbeafdeadbeafdeadbeafdeadbeafdeadbeafdeadbeafdeadbeaf"
 
 jobs:
   test:
