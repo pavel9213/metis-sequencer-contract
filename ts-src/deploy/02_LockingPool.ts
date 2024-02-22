@@ -10,10 +10,21 @@ const func: DeployFunction = async function (hre) {
   const { deployer } = await hre.getNamedAccounts();
 
   const bridge = process.env.METIS_BRIDGE;
+  if (!hre.ethers.isAddress(bridge)) {
+    throw new Error(`METIS_BRIDGE env is not set or it's not an address`);
+  }
+
   const l1Metis = process.env.MEITS_L1_TOKEN;
+  if (!hre.ethers.isAddress(l1Metis)) {
+    throw new Error(`MEITS_L1_TOKEN env is not set or it's not an address`);
+  }
+
   const { address: LockingNFTAddress } =
     await hre.deployments.get("LockingNFT");
   const l2Chainid = parseInt(process.env.METIS_L2_CHAINID as string, 0);
+  if (!l2Chainid) {
+    throw new Error(`METIS_L2_CHAINID env should be valid chainId`);
+  }
 
   const l2Metis = "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000";
 

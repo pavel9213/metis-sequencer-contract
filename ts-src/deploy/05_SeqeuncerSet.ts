@@ -10,19 +10,42 @@ const func: DeployFunction = async function (hre) {
   const { deployer } = await hre.getNamedAccounts();
 
   const seq = process.env.METIS_SEQSET_FIRST_SEQUENCER;
+  if (!hre.ethers.isAddress(seq)) {
+    throw new Error(
+      `METIS_SEQSET_FIRST_SEQUENCER env is not set or it's not an address`,
+    );
+  }
+
   const startBlock = parseInt(
     process.env.METIS_SEQSET_FIRST_START_BLOCK as string,
     0,
   );
+  if (Number.isNaN(startBlock)) {
+    throw new Error(
+      `METIS_SEQSET_FIRST_START_BLOCK env is not set or it's not a number`,
+    );
+  }
+
   const endblock = parseInt(
     process.env.METIS_SEQSET_FIRST_END_BLOCK as string,
     0,
   );
+  if (Number.isNaN(startBlock)) {
+    throw new Error(
+      `METIS_SEQSET_FIRST_END_BLOCK env is not set or it's not a number`,
+    );
+  }
 
   const epochLength = parseInt(
     process.env.METIS_SEQSET_EPOCH_LENGTH as string,
     0,
   );
+
+  if (Number.isNaN(startBlock)) {
+    throw new Error(
+      `METIS_SEQSET_EPOCH_LENGTH env is not set or it's not a number`,
+    );
+  }
 
   console.log(
     "using params:",
